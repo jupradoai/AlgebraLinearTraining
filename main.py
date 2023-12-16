@@ -1,6 +1,5 @@
 import numpy as np
 
-# Definir os vetores v1, v2 e v3
 v1 = np.array([2, 1, 1])
 v2 = np.array([1, 2, 2])
 v3 = np.array([1, 1, 2])
@@ -15,13 +14,9 @@ A = np.column_stack((v1, v2, v3))
 # O sistema é sobredeterminado, então usamos a função de mínimos quadrados
 x, residuals, rank, s = np.linalg.lstsq(A, V, rcond=None)
 
-# Verificar a natureza do sistema
-if rank == A.shape[1]:
-    if np.allclose(np.dot(A, x), V):
-        print("O sistema é possível determinado (SPD), e o vetor V pertence ao espaço gerado por v1, v2 e v3.")
-    else:
-        print("O sistema é possível determinado (SPD), mas o vetor V NÃO pertence ao espaço gerado por v1, v2 e v3.")
-elif rank < A.shape[1]:
-    print("O sistema é possível indeterminado (SPI).")
+# Verificar se x é uma solução
+if np.allclose(np.dot(A, x), V):
+    print("O vetor V pertence ao espaço gerado por v1, v2 e v3.")
+
 else:
-    print("O sistema é impossível (SI).")
+    print("O vetor V NÃO pertence ao espaço gerado por v1, v2 e v3.")
